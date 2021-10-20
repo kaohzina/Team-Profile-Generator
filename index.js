@@ -15,37 +15,40 @@ const employees = [];
 
 const managerContent = [
   {
-    type: '',
-    name: '',
-    message: '',
-    validate: => {
-      if () {
+    type: 'input',
+    name: 'teamManagerName',
+    message: 'What is the team managers full-name?',
+    validate: teamManagerInput => {
+      if (teamManagerInput) {
         return true;
       } else {
+        console.log("Please enter a full name for the team's manager.");
         return false;
       }
     }
   },
   {
-    type: '',
-    name: '',
-    message: '',
-    validate: => {
-      if () {
+    type: 'input',
+    name: 'teamManagerId',
+    message: 'What is the team managers employee ID?',
+    validate: teamManagerIdInput=> {
+      if (teamManagerIdInput) {
         return true;
       } else {
+        console.log("Please enter the employee ID for this manager.");
         return false;
       }
     }
   },
   {
-    type: '',
-    name: '',
-    message: '',
-    validate: => {
-      if () {
+    type: 'input',
+    name: 'teamManagerEmail',
+    message: 'What is the team managers email address?',
+    validate: teamManagerEmailInput=> {
+      if (teamManagerEmailInput) {
         return true;
       } else {
+        console.log("Please enter the team managers email addrress.");
         return false;
       }
     }
