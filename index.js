@@ -54,25 +54,27 @@ const managerContent = [
     }
   },
   {
-    type: '',
-    name: '',
-    message: '',
-    validate: => {
-      if () {
+    type: 'input',
+    name: 'teamManagerPhoneNumber',
+    message: 'What is the team managers office phone number?',
+    validate: teamManagerPhoneInput=> {
+      if (teamManagerPhoneInput) {
         return true;
       } else {
+        console.log("Please enter the team managers office phone number.");
         return false;
       }
     }
   },
   {
-    type: '',
-    name: '',
-    message: '',
-    validate: => {
-      if () {
+    type: 'confirm',
+    name: 'addTeamMember',
+    message: 'Would you like to add a new team member?',
+    validate: addTeamMemberConfirmation => {
+      if (addTeamMemberConfirmation) {
         return true;
       } else {
+        
         return false;
       }
     }
