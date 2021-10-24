@@ -184,7 +184,7 @@ const newEmployeeContent = () => {
 ])
 }
 async function init(){
-  const data = await promptUser();
+  const data = await newEmployeeContent();
   const generateReadMe = generateMarkdown(data)
   fs.writeFile('./dist/README.md', generateReadMe, err => {
     if (err) { reject(err); return;}
@@ -202,3 +202,5 @@ const engineerQuestions = function() {
 const app = require('./lib/app');
 
 new app().initializeApp();
+
+init();
