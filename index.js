@@ -13,10 +13,11 @@ let internFile = {}
 
 const employees = [];
 
-const managerContent = [
+const managerContent = () => { 
+  return inquirer.prompt([
   {
     type: 'input',
-    name: 'teamManagerName',
+    name: 'name',
     message: 'What is the team managers full-name?',
     validate: teamManagerInput => {
       if (teamManagerInput) {
@@ -29,7 +30,7 @@ const managerContent = [
   },
   {
     type: 'input',
-    name: 'teamManagerId',
+    name: 'id',
     message: 'What is the team managers employee ID?',
     validate: teamManagerIdInput=> {
       if (teamManagerIdInput) {
@@ -42,7 +43,7 @@ const managerContent = [
   },
   {
     type: 'input',
-    name: 'teamManagerEmail',
+    name: 'email',
     message: 'What is the team managers email address?',
     validate: teamManagerEmailInput=> {
       if (teamManagerEmailInput) {
@@ -55,7 +56,7 @@ const managerContent = [
   },
   {
     type: 'input',
-    name: 'teamManagerOfficeNumber',
+    name: 'officeNumber',
     message: 'What is the team managers office number?',
     validate: teamManagerOfficeInput=> {
       if (teamManagerOfficeInput) {
@@ -68,172 +69,128 @@ const managerContent = [
   },
   {
     type: 'confirm',
-    name: 'addTeamMember',
+    name: 'addMember',
     message: 'Would you like to add a new team member?',
     default: false
   },
   {
     type: 'checkbox',
-    name: 'teamMemberPosition',
+    name: 'memberRole',
     message: 'What position does this team member have?',
     choices: ['Engineer', 'Intern'],
-    when: addTeamMember => {
-      if (addTeamMember) {
+    when: addMember => {
+      if (addMember) {
         return true;
       } else {
         return false;
       }  
     }
   },
-],
-
-const engineerContent = [
+])
+},
+const newEmployeeContent = () => {
+  return inquirer.prompt([
+  {
+    type: 'list',
+    name: 'employeeRole',
+    message: 'What position does this employee have?',
+    choices: ['Engineer', 'Intern'],
+  },
   {
     type: 'input',
-    name: 'engineerName',
-    message: 'What is the engineers full-name?',
+    name: 'name',
+    message: 'What is the employees full-name?',
     validate: engineerInput => {
       if (engineerInput) {
         return true;
       } else {
-        console.log("Please enter a full name for the engineer.");
+        console.log("Please enter a full name for the employee.");
         return false;
       }
     }
   },
   {
     type: 'input',
-    name: 'engineerId',
-    message: 'What is the engineers employee ID?',
-    validate: engineerIdInput=> {
-      if (engineerIdInput) {
+    name: 'id',
+    message: 'What is the employee ID?',
+    validate: employeeId => {
+      if ( employeeId) {
         return true;
       } else {
-        console.log("Please enter the employee ID for this engineer.");
+        console.log("Please enter the employee ID.");
         return false;
       }
     }
   },
   {
     type: 'input',
-    name: 'engineerEmail',
-    message: 'What is the team managers email address?',
-    validate: engineerEmailInput=> {
-      if (engineerEmailInput) {
+    name: 'github',
+    message: 'What is the employees GitHub username?',
+    validate: employeeGithub => {
+      if ( employeeGithub) {
         return true;
       } else {
-        console.log("Please enter the engineers email addrress.");
+        console.log("Please enter the employee GitHub username.");
         return false;
       }
     }
   },
   {
     type: 'input',
-    name: 'engineerOfficeNumber',
-    message: 'What is the engineers office number?',
-    validate: engineerOfficeInput=> {
-      if (engineerOfficeInput) {
+    name: 'email',
+    message: 'What is the employees email address?',
+    validate: employeeEmail => {
+      if (employeeEmail) {
         return true;
       } else {
-        console.log("Please enter the engineers office number.");
+        console.log("Please enter the employees email addrress.");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'officeNumber',
+    message: 'What is the employees office number?',
+    validate: employeeOfficeNumber => {
+      if (employeeOfficeNumber) {
+        return true;
+      } else {
+        console.log("Please enter the employees office number.");
+        return false;
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'school',
+    message: 'Enter the school the intern is enrolled at.',
+    when: (role) => role.employeeRole === 'Intern',
+    validate: schoolName => {
+      if(schoolName) {
+        return true;
+      } else {
+        console.log("Provide the school the intern is attending.")
         return false;
       }
     }
   },
   {
     type: 'confirm',
-    name: 'addTeamMember',
+    name: 'addMember',
     message: 'Would you like to add a new team member?',
     default: false
   },
-  {
-    type: 'checkbox',
-    name: 'teamMemberPosition',
-    message: 'What position does this team member have?',
-    choices: ['Engineer', 'Intern'],
-    when: addTeamMember => {
-      if (addTeamMember) {
-        return true;
-      } else {
-        return false;
-      }  
-    }
-  },
-],
+])
+}
+async function init(){
+  const data = await promptUser();
+  const generateReadMe = generateMarkdown(data)
+  fs.writeFile('./dist/README.md', generateReadMe, err => {
+    if (err) { reject(err); return;}
+  });
+};
 
-const internContent = [
-  {
-    type: 'input',
-    name: 'internName',
-    message: 'What is the interns full-name?',
-    validate: internNameInput => {
-      if (interNameInput) {
-        return true;
-      } else {
-        console.log("Please enter a full name for the intern.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'input',
-    name: 'internsId',
-    message: 'What is the interns employee ID?',
-    validate: internIdInput=> {
-      if (internIdInput) {
-        return true;
-      } else {
-        console.log("Please enter the employee ID for this intern.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'input',
-    name: 'internEmail',
-    message: 'What is the interns email address?',
-    validate: internEmailInput=> {
-      if (internEmailInput) {
-        return true;
-      } else {
-        console.log("Please enter the interns email addrress.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'input',
-    name: 'internOfficeNumber',
-    message: 'What is the interns office number?',
-    validate: internOfficeInput=> {
-      if (internOfficeInput) {
-        return true;
-      } else {
-        console.log("Please enter the interns office number.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'confirm',
-    name: 'addTeamMember',
-    message: 'Would you like to add a new team member?',
-    default: false
-  },
-  {
-    type: 'checkbox',
-    name: 'teamMemberPosition',
-    message: 'What position does this team member have?',
-    choices: ['Engineer', 'Intern'],
-    when: addTeamMember => {
-      if (addTeamMember) {
-        return true;
-      } else {
-        return false;
-      }  
-    }
-  },
-],
 
 const engineerQuestions = function() {
   return inquirer
