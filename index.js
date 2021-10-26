@@ -178,8 +178,8 @@ function newEmployeeContent(){
 
 async function init(){
   const data = await managerContent();
-  const generateProfile = newEmployeeContent(data)
-  fs.writeFile('./dist/index.html', generateProfile, err => {
+  const createTeam = createFile(data)
+  fs.writeFile('./dist/index.html', createTeam, err => {
     if (err) { reject(err); return;}
   });
 };
