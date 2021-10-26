@@ -7,13 +7,9 @@ const Intern = require('./lib/Intern')
 
 const createFile = require('./src/createFile')
 
-let managerFile = {}
-let engineerFile = {}
-let internFile = {}
-
 const employees = [];
 
-const managerContent = () => { 
+function managerContent(){ 
   return inquirer.prompt([
   {
     type: 'input',
@@ -71,13 +67,7 @@ const managerContent = () => {
     type: 'confirm',
     name: 'addMember',
     message: 'Would you like to add a new team member?',
-    default: false
-  },
-  {
-    type: 'checkbox',
-    name: 'memberRole',
-    message: 'What position does this team member have?',
-    choices: ['Engineer', 'Intern'],
+    default: false,
     when: addMember => {
       if (addMember) {
         return true;
@@ -87,8 +77,10 @@ const managerContent = () => {
     }
   },
 ])
-},
-const newEmployeeContent = () => {
+}
+
+
+function newEmployeeContent(){
   return inquirer.prompt([
   {
     type: 'list',
@@ -179,14 +171,15 @@ const newEmployeeContent = () => {
     type: 'confirm',
     name: 'addMember',
     message: 'Would you like to add a new team member?',
-    default: false
+    default: false,
   },
 ])
 }
+
 async function init(){
-  const data = await newEmployeeContent();
-  const generateReadMe = generateMarkdown(data)
-  fs.writeFile('./dist/README.md', generateReadMe, err => {
+  const data = await managerContent();
+  const generateProfile = newEmployeeContent(data)
+  fs.writeFile('./dist/index.html', generateProfile, err => {
     if (err) { reject(err); return;}
   });
 };
@@ -199,8 +192,7 @@ const engineerQuestions = function() {
     const newEngineer = new Engineer(response.name, response.id, response.email);
   })
 }
-const app = require('./lib/app');
 
-new app().initializeApp();
+
 
 init();
