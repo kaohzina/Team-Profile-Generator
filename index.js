@@ -7,7 +7,7 @@ const Intern = require('./lib/Intern')
 
 const createFile = require('./src/createFile')
 
-const employees = [];
+const teamProfile = [];
 
 function managerContent(){ 
   return inquirer.prompt([
@@ -15,8 +15,8 @@ function managerContent(){
     type: 'input',
     name: 'name',
     message: 'What is the team managers full-name?',
-    validate: teamManagerInput => {
-      if (teamManagerInput) {
+    validate: teamManagerNameInput => {
+      if (teamManagerNameInput) {
         return true;
       } else {
         console.log("Please enter a full name for the team's manager.");
@@ -63,21 +63,24 @@ function managerContent(){
       }
     }
   },
-  {
-    type: 'confirm',
-    name: 'addMember',
-    message: 'Would you like to add a new team member?',
-    default: false,
-    when: addMember => {
-      if (addMember) {
-        return true;
-      } else {
-        return false;
-      }  
-    }
-  },
+
 ])
-}
+.then 
+//   {
+//     type: 'confirm',
+//     name: 'addMember',
+//     message: 'Would you like to add a new team member?',
+//     default: false,
+//     when: addMember => {
+//       if (addMember) {
+//         return true;
+//       } else {
+//         return false;
+//       }  
+//     }
+//   },
+// ])
+// }
 
 
 function newEmployeeContent(){
