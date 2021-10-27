@@ -195,26 +195,31 @@ function newEmployeeContent(){
 
   teamProfile.push(employee);
 
+  if(addMember) {
+    return newEmployeeContent(teamProfile);
+  } else {
+    return teamProfile;
+  }
 })
-}
-
-async function init(){
-  const data = await managerContent();
-  const createTeam = createFile(data)
-  fs.writeFile('./dist/index.html', createTeam, err => {
-    if (err) { reject(err); return;}
-  });
 };
 
-
-const engineerQuestions = function() {
-  return inquirer
-  .prompt(engineerContent).then(response => {
-    engineerFile = response;
-    const newEngineer = new Engineer(response.name, response.id, response.email);
+const writeFile = data => {
+  fs.writeFile('./dist/index.html', data, err => {
+    if (err) { console.log(err); return;}
+    else {
+      console.log("Team profile is created. Check the dist directory.")
+    }
   })
-}
+};
 
-
-
-init();
+managerContent()
+.then(newEmployeeContent)
+.then(teamProfile => {
+  return createFile(teamProfile);
+})
+.then(pageHTML => {
+  return writeFile(pageHTML);
+})
+.catch(err => {
+  console.log(err);
+   });
