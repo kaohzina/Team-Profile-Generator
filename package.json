@@ -20,6 +20,6 @@
   "homepage": "https://github.com/kaohzina/Team-Profile-Generator#readme",
   "dependencies": {
     "inquirer": "^8.2.0",
-    "jest": "^27.3.0"
+    "jest": "^27.3.1"
   }
 }
