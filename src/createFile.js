@@ -1,4 +1,4 @@
-const generateManager = function(manager){
+const createFile = function(manager){
   return`  
   
   `
