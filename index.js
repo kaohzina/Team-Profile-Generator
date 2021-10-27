@@ -65,23 +65,14 @@ function managerContent(){
   },
 
 ])
-.then 
-//   {
-//     type: 'confirm',
-//     name: 'addMember',
-//     message: 'Would you like to add a new team member?',
-//     default: false,
-//     when: addMember => {
-//       if (addMember) {
-//         return true;
-//       } else {
-//         return false;
-//       }  
-//     }
-//   },
-// ])
-// }
+.then(teamManagerInput => {
+  const { name, id, email, officeNumber } = teamManagerInput;
+  const manager = new Manager (name, id, email, officeNumber);
 
+  teamProfile.push(manager);
+  console.log(manager);
+})
+};
 
 function newEmployeeContent(){
   return inquirer.prompt([
@@ -95,8 +86,8 @@ function newEmployeeContent(){
     type: 'input',
     name: 'name',
     message: 'What is the employees full-name?',
-    validate: engineerInput => {
-      if (engineerInput) {
+    validate: employeeNameInput => {
+      if (employeeNameInput) {
         return true;
       } else {
         console.log("Please enter a full name for the employee.");
@@ -158,6 +149,19 @@ function newEmployeeContent(){
   },
   {
     type: 'input',
+    name: 'github',
+    message: "Please enter the employee's github username.",
+    when: (input) => input.role === "Engineer",
+    validate: nameInput => {
+        if (nameInput ) {
+            return true;
+        } else {
+            console.log ("Please enter the employee's github username!")
+        }
+    }
+},
+  {
+    type: 'input',
     name: 'school',
     message: 'Enter the school the intern is enrolled at.',
     when: (role) => role.employeeRole === 'Intern',
@@ -177,6 +181,21 @@ function newEmployeeContent(){
     default: false,
   },
 ])
+.then (employeeContent => {
+  let { name, id, email, role, github, school, addMember } = employeeContent;
+  let employee;
+
+  if (role === 'Engineer') {
+    employee = new Engineer (name, id, email, github);
+    console.log(employee);
+  } else if (role === 'Intern') {
+    employee = new Intern(name, id, email, school);
+    console.log(employee)
+  }
+
+  teamProfile.push(employee);
+
+})
 }
 
 async function init(){
