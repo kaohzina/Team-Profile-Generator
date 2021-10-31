@@ -110,19 +110,6 @@ function newEmployeeContent(){
   },
   {
     type: 'input',
-    name: 'github',
-    message: 'What is the employees GitHub username?',
-    validate: employeeGithub => {
-      if ( employeeGithub) {
-        return true;
-      } else {
-        console.log("Please enter the employee GitHub username.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'input',
     name: 'email',
     message: 'What is the employees email address?',
     validate: employeeEmail => {
@@ -130,19 +117,6 @@ function newEmployeeContent(){
         return true;
       } else {
         console.log("Please enter the employees email addrress.");
-        return false;
-      }
-    }
-  },
-  {
-    type: 'input',
-    name: 'officeNumber',
-    message: 'What is the employees office number?',
-    validate: employeeOfficeNumber => {
-      if (employeeOfficeNumber) {
-        return true;
-      } else {
-        console.log("Please enter the employees office number.");
         return false;
       }
     }

@@ -1,31 +1,22 @@
 //simple test to see if making an Intern works!
 const Intern = require('../lib/Intern');
 
+test("get an intern role", () => {
+  const role = "Intern";
+  const intern = new Intern("John", 1, "JohnSmith@gmail.com", "githubname");
 
-
-test('get an Intern name', () => {
-  const name = 'John';
-  const Intern = new Intern('John', 1, 'JohnSmith@gmail.com');
-
-  expect(Intern.name).toBe(name);
+  expect(intern.getRole()).toBe(role);
 });
 
-test('get an Intern id', () => {
-  const id = 1;
-  const Intern = new Intern('John', id, 'JohnSmith@gmail.com');
+test("get an intern id", () => {
+  const school = "githubname";
+  const intern = new Intern("John", 1, "JohnSmith@gmail.com", school );
 
-  expect(Intern.id).toBe(id);
+  expect(intern.getSchool()).toBe(school);
 });
 
-test('get an Intern email', () => {
-  const email = 'JohnSmith@gmail.com';
-  const Intern = new Intern('John', 1, email);
+test("create an intern object", () => {
+  const intern = new Intern("John", 1, "JohnSmith@gmail.com", "github");
 
-  expect(Intern.getEmail()).toBe(email);
-});
-
-test('get an Intern role', () => {
-  const Intern = new Intern('John', 1, 'JohnSmith@gmail.com');
-
-  expect(Intern.getRole()).toEqual("Intern");
+  expect(intern.school).toEqual(expect.any(String));
 });

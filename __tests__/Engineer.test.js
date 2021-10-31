@@ -1,31 +1,22 @@
 //simple test to see if making an Engineer works!
-const Engineer = require('../lib/Engineer');
+const Engineer = require("../lib/Engineer");
 
+test("get an Engineer role", () => {
+  const role = "Engineer";
+  const engineer = new Engineer("John", 1, "JohnSmith@gmail.com", "githubname");
 
-
-test('get an Engineer name', () => {
-  const name = 'John';
-  const Engineer = new Engineer('John', 1, 'JohnSmith@gmail.com');
-
-  expect(Engineer.name).toBe(name);
+  expect(engineer.getRole()).toBe(role);
 });
 
-test('get an Engineer id', () => {
-  const id = 1;
-  const Engineer = new Engineer('John', id, 'JohnSmith@gmail.com');
+test("get an Engineer id", () => {
+  const github = "githubname";
+  const engineer = new Engineer("John", 1, "JohnSmith@gmail.com", github);
 
-  expect(Engineer.id).toBe(id);
+  expect(engineer.getGithub()).toBe(github);
 });
 
-test('get an Engineer email', () => {
-  const email = 'JohnSmith@gmail.com';
-  const Engineer = new Engineer('John', 1, email);
+test("create an engineer object", () => {
+  const engineer = new Engineer("John", 1, "JohnSmith@gmail.com", "github");
 
-  expect(Engineer.getEmail()).toBe(email);
-});
-
-test('get an Engineer role', () => {
-  const Engineer = new Engineer('John', 1, 'JohnSmith@gmail.com');
-
-  expect(Engineer.getRole()).toEqual("Engineer");
+  expect(engineer.github).toEqual(expect.any(String));
 });
