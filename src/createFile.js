@@ -1,15 +1,20 @@
-const createManager = function (manager) {
+// const Manager = require('../lib/Manager');
+// const Engineer = require('../lib/Engineer')
+// const Intern = require('../lib/Intern')
+
+
+const createManager = function (Manager) {
   return `
 <div class="col">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Manager</h5>
-        <p class="card-text">Name: ${manager.name} </p>
+        <p class="card-text">Name: ${Manager.getName()} </p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID: ${manager.id}</li>
-      <li class="list-group-item">EMAIL: ${manager.email}</li>
-      <li class="list-group-item">OFFICE NUMBER: ${manager.officeNumber}</li>
+      <li class="list-group-item">ID: ${Manager.getId()}</li>
+      <li class="list-group-item">EMAIL: ${Manager.getEmail()}</li>
+      <li class="list-group-item">OFFICE NUMBER: ${Manager.getOfficeNumber()}</li>
     </ul>
   </div>
 </div>`;
@@ -58,16 +63,16 @@ generateHTML = (data) => {
       const role = employee.getRole(); 
 
       if (role === 'Manager') {
-          const managerCard = generateManager(employee);
-          pageArray.push(managerCard);
+          const ManagerCard = createManager(employee);
+          pageArray.push(ManagerCard);
       }
       if (role === 'Engineer') {
-          const engineerCard = generateEngineer(employee);
+          const engineerCard = createEngineer(employee);
           pageArray.push(engineerCard);
       }
 
       if (role === 'Intern') {
-          const internCard = generateIntern(employee);
+          const internCard = createIntern(employee);
           pageArray.push(internCard);
       }
   }
