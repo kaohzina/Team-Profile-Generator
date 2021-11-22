@@ -1,16 +1,14 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
-
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-
 const createFile = require("./src/createFile");
 
 const teamProfile = [];
 
 function managerContent() {
-  return inquirer
+  inquirer
     .prompt([
       {
         type: "input",
@@ -47,7 +45,7 @@ function managerContent() {
 }
 
 function newEmployeeContent() {
-  return inquirer
+  inquirer
     .prompt([
       {
         type: "list",
@@ -75,27 +73,12 @@ function newEmployeeContent() {
         name: "github",
         message: "Please enter the employee's github username.",
         when: (input) => input.role === "Engineer",
-        validate: (nameInput) => {
-          if (nameInput) {
-            return true;
-          } else {
-            console.log("Please enter the employee's github username!");
-          }
-        },
       },
       {
         type: "input",
         name: "school",
         message: "Enter the school the intern is enrolled at.",
         when: (role) => role.employeeRole === "Intern",
-        validate: (schoolName) => {
-          if (schoolName) {
-            return true;
-          } else {
-            console.log("Provide the school the intern is attending.");
-            return false;
-          }
-        },
       },
       {
         type: "confirm",
