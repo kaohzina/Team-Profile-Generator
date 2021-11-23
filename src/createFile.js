@@ -1,89 +1,80 @@
-// const Manager = require('../lib/Manager');
-// const Engineer = require('../lib/Engineer')
-// const Intern = require('../lib/Intern')
-
-
 const createManager = function (Manager) {
   return `
 <div class="col">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Manager</h5>
-        <p class="card-text">Name: ${Manager.getName()} </p>
+        <p class="card-text">Name: ${Manager.name} </p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID: ${Manager.getId()}</li>
-      <li class="list-group-item">EMAIL: ${Manager.getEmail()}</li>
-      <li class="list-group-item">OFFICE NUMBER: ${Manager.getOfficeNumber()}</li>
+      <li class="list-group-item">ID: ${Manager.id}</li>
+      <li class="list-group-item">EMAIL: ${Manager.email}</li>
+      <li class="list-group-item">OFFICE NUMBER: ${Manager.officeNumber}</li>
     </ul>
   </div>
-</div>`;
-};
-
-const createEngineer = function (engineer) {
+</div>`
+}
+const createEngineer = function (Engineer) {
   return `
 <div class="col">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Engineer</h5>
-      <p class="card-text">Name: ${engineer.name} </p>
+      <p class="card-text">Name: ${Engineer.name} </p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID: ${engineer.id}</li>
-      <li class="list-group-item">EMAIL: ${engineer.email}</li>
-      <li class="list-group-item">Github: ${engineer.github}</li>
+      <li class="list-group-item">ID: ${Engineer.id}</li>
+      <li class="list-group-item">EMAIL: ${Engineer.email}</li>
+      <li class="list-group-item">Github: ${Engineer.github}</li>
     </ul>
   </div>
-</div>`;
-};
-
-const createIntern = function (intern) {
+</div>`
+}
+const createIntern = function (Intern) {
   return `
 <div class="col">
   <div class="card" style="width: 18rem;">
     <div class="card-body">
       <h5 class="card-title">Intern</h5>
-      <p class="card-text">Name: ${intern.name} </p>
+      <p class="card-text">Name: ${Intern.name} </p>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">ID: ${intern.id}</li>
-      <li class="list-group-item">EMAIL: ${intern.email}</li>
-      <li class="list-group-item">School: ${intern.school}</li>
+      <li class="list-group-item">ID: ${Intern.id}</li>
+      <li class="list-group-item">EMAIL: ${Intern.email}</li>
+      <li class="list-group-item">School: ${Intern.school}</li>
     </ul>
   </div>
-</div>`;
-};
-
-// push array to page 
-generateHTML = (data) => {
-  pageArray = []; 
-
-  for (let i = 0; i < data.length; i++) {
-      const employee = data[i];
-      const role = employee.getRole(); 
-
-      if (role === 'Manager') {
-          const ManagerCard = createManager(employee);
-          pageArray.push(ManagerCard);
-      }
-      if (role === 'Engineer') {
-          const engineerCard = createEngineer(employee);
-          pageArray.push(engineerCard);
-      }
-
-      if (role === 'Intern') {
-          const internCard = createIntern(employee);
-          pageArray.push(internCard);
-      }
-  }
-  const employeeCards = pageArray.join('')
-
-  const generateTeam = generateTeamPage(employeeCards); 
-  return generateTeam;
-
+</div>`
 }
 
-const createFile = function (employeeCards) {
+// push array to page
+generateHTML = (data) => {
+  pageArray = [];
+  for (let i = 0; i < data.length; i++) {
+    const employee = data[i];
+    const role = employee.getRole();
+
+    if (role === 'Manager') {
+      const managerProfile = createManager(employee);
+      pageArray.push(managerProfile)
+    } 
+  
+    if (role === 'Engineer') {
+      const engineerProfile = createEngineer(employee);
+      pageArray.push(engineerProfile)
+
+    } 
+    if (role  === 'Intern') {
+      const internProfile = createIntern(employee);
+      pageArray.push(internProfile)
+    }
+  }
+  const cards = pageArray.join('')
+  const profile = createFile(cards)
+  return profile;
+}
+
+const createFile = function (cards) {
   return `  
   <!DOCTYPE html>
 <html lang="en">
@@ -102,7 +93,7 @@ const createFile = function (employeeCards) {
 <div class="container">
     <div class="row justify-content-center m-4" id="team-cards">
         
-        ${employeeCards}
+        ${cards}
     </div>
 </div>
 </main>
