@@ -1,50 +1,30 @@
-# Team-Profile-Generator
+# Team profile generator
+ 
+## Description
+A prompted team profile generator that allows you to create an easy html file for your employees. 
 
-AS A manager
-I WANT to generate a webpage that displays my team's basic info
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Questions](#questions)
+* [License](#license)   
 
-SO THAT I have quick access to their emails and GitHub profiles
+## Installation
+Clone/Copy/Download the repository from the github provided, npm install for all the packages in the package.json to ensure they are updated. 
 
-GIVEN a command-line application that accepts user input
-WHEN I am prompted for my team members and their information
-THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+## Usage
+To create an easy to use team profile generator.
 
-WHEN I click on an email address in the HTML
-THEN my default email program opens and populates the TO field of the email with the address
+## Contributing
+Fork the repository from the github provided below
 
-WHEN I click on the GitHub username
-THEN that GitHub profile opens in a new tab
+## Tests
+npm start
 
-WHEN I start the application
-THEN I am prompted to enter the 
-team manager’s name, 
-employee ID, 
-email address, 
-office number
+## License
+This project is under the [NONE](https://opensource.org/licenses/NONE) license.
 
-WHEN I enter the 
-team manager’s name, 
-employee ID, 
-email address, 
-office number
-
-THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-
-WHEN I select the engineer option
-THEN I am prompted to enter the 
-engineer’s name, 
-ID, 
-email, 
-and GitHub username, 
-I am taken back to the menu
-
-WHEN I select the intern option
-THEN I am prompted to enter the 
-intern’s name, 
-ID, 
-email, 
-school, 
-and I am taken back to the menu
-
-WHEN I decide to finish building my team
-THEN I exit the application, and the HTML is generated
+## Questions
+If you want to contact me you can reach me at zinanshin.kaoher@gmail.com or checkout my GitHub account at [kaohzina](https://github.com/kaohzina).

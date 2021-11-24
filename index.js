@@ -15,8 +15,8 @@ function managerContent(){
     type: 'input',
     name: 'name',
     message: 'What is the team managers full-name?',
-    validate: teamManagerNameInput => {
-      if (teamManagerNameInput) {
+    validate: nameInput => {
+      if (nameInput) {
         return true;
       } else {
         console.log("Please enter a full name for the team's manager.");
@@ -28,8 +28,8 @@ function managerContent(){
     type: 'input',
     name: 'id',
     message: 'What is the team managers employee ID?',
-    validate: teamManagerIdInput=> {
-      if (teamManagerIdInput) {
+    validate: idInput=> {
+      if (idInput) {
         return true;
       } else {
         console.log("Please enter the employee ID for this manager.");
@@ -41,8 +41,8 @@ function managerContent(){
     type: 'input',
     name: 'email',
     message: 'What is the team managers email address?',
-    validate: teamManagerEmailInput=> {
-      if (teamManagerEmailInput) {
+    validate: emailInput=> {
+      if (emailInput) {
         return true;
       } else {
         console.log("Please enter the team managers email addrress.");
@@ -54,8 +54,8 @@ function managerContent(){
     type: 'input',
     name: 'officeNumber',
     message: 'What is the team managers office number?',
-    validate: teamManagerOfficeInput=> {
-      if (teamManagerOfficeInput) {
+    validate: officeInput=> {
+      if (officeInput) {
         return true;
       } else {
         console.log("Please enter the team managers office number.");
@@ -65,8 +65,8 @@ function managerContent(){
   },
 
 ])
-.then(teamManagerInput => {
-  const { name, id, email, officeNumber } = teamManagerInput;
+.then(managerInput => {
+  const { name, id, email, officeNumber } = managerInput;
   const manager = new Manager (name, id, email, officeNumber);
 
   teamProfile.push(manager);
